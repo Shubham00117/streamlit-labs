@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Streamlit — Industry Notes</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;family=Outfit:wght@300;400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #07070e;
+            --surface: #0f0f1a;
+            --card: #111120;
+            --border: #1c1c30;
+            --accent: #7c5cfc;
+            --accent2: #fc5c7d;
+            --green: #00e5a0;
+            --yellow: #ffc947;
+            --blue: #38b6ff;
+            --orange: #ff8c42;
+            --text: #dde1f0;
+            --muted: #555578;
+            --code-bg: #090912;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            padding: 40px 20px 100px;
+            line-height: 1.65;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            text-align: center;
+            padding: 48px 0 40px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #1a1a2e;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 99px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .tagline {
+            color: var(--muted);
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        /* ── TOC ── */
+        .toc {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 48px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 6px 20px;
+        }
+
+        .toc a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color .15s;
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+        }
+
+        .toc a::before {
+            content: '→';
+            color: var(--accent);
+            font-size: 11px;
+        }
+
+        /* ── SECTION ── */
+        .section {
+            margin-bottom: 52px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .ic-purple {
+            background: rgba(124, 92, 252, .15);
+        }
+
+        .ic-green {
+            background: rgba(0, 229, 160, .12);
+        }
+
+        .ic-blue {
+            background: rgba(56, 182, 255, .12);
+        }
+
+        .ic-yellow {
+            background: rgba(255, 201, 71, .12);
+        }
+
+        .ic-pink {
+            background: rgba(252, 92, 125, .12);
+        }
+
+        .ic-orange {
+            background: rgba(255, 140, 66, .12);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .section-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-bottom: 14px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p {
+            font-size: 13.5px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ── CODE ── */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid #18182a;
+            border-radius: 8px;
+            padding: 14px 18px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            line-height: 1.8;
+            color: #b0b8d8;
+            margin-top: 10px;
+        }
+
+        pre:last-child {
+            margin-bottom: 0;
+        }
+
+        .kw {
+            color: #c792ea;
+        }
+
+        .fn {
+            color: #82aaff;
+        }
+
+        .str {
+            color: #c3e88d;
+        }
+
+        .cm {
+            color: #3d4060;
+            font-style: italic;
+        }
+
+        .dec {
+            color: var(--yellow);
+        }
+
+        .var {
+            color: #f07178;
+        }
+
+        .num {
+            color: #f78c6c;
+        }
+
+        .hi {
+            background: rgba(124, 92, 252, .18);
+            border-radius: 3px;
+            padding: 1px 3px;
+        }
+
+        /* ── TAG / PILL ── */
+        .tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px 3px 2px 0;
+            border: 1px solid var(--border);
+        }
+
+        .tag-p {
+            background: rgba(124, 92, 252, .1);
+            color: var(--accent);
+            border-color: rgba(124, 92, 252, .3);
+        }
+
+        .tag-g {
+            background: rgba(0, 229, 160, .08);
+            color: var(--green);
+            border-color: rgba(0, 229, 160, .25);
+        }
+
+        .tag-b {
+            background: rgba(56, 182, 255, .08);
+            color: var(--blue);
+            border-color: rgba(56, 182, 255, .25);
+        }
+
+        .tag-y {
+            background: rgba(255, 201, 71, .08);
+            color: var(--yellow);
+            border-color: rgba(255, 201, 71, .25);
+        }
+
+        .tag-r {
+            background: rgba(252, 92, 125, .08);
+            color: var(--accent2);
+            border-color: rgba(252, 92, 125, .25);
+        }
+
+        /* ── TABLE ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #131320;
+            vertical-align: top;
+        }
+
+        td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--blue);
+            font-size: 12px;
+        }
+
+        td:last-child {
+            color: var(--muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ── NOTE / TIP ── */
+        .tip {
+            display: flex;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 7px;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        .tip-y {
+            background: #1a1500;
+            border-left: 3px solid var(--yellow);
+            color: #c8a840;
+        }
+
+        .tip-g {
+            background: #001a12;
+            border-left: 3px solid var(--green);
+            color: #00b07a;
+        }
+
+        .tip-p {
+            background: #110d20;
+            border-left: 3px solid var(--accent);
+            color: #9b82f5;
+        }
+
+        /* ── GRID ── */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 640px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── COMPARE ── */
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .compare-box {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .compare-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .cl-green {
+            color: var(--green);
+        }
+
+        .cl-blue {
+            color: var(--blue);
+        }
+
+        @media (max-width: 600px) {
+            .compare {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* run cmd */
+        .run {
+            background: #061206;
+            border: 1px solid #1a3a1a;
+            border-radius: 8px;
+            padding: 11px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            color: var(--green);
+            margin-top: 10px;
+        }
+
+        .run::before {
+            content: '$ ';
+            color: var(--muted);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="badge">CampusX · Module 12 · Streamlit Complete Guide</div>
+            <h1>Streamlit <span>Complete</span> Guide</h1>
+            <p class="tagline">Tables &amp; Industry Use Cases for Production-grade Streamlit Apps</p>
+        </div>
+        <!-- TOC -->
+        <div class="toc">
+            <a href="#exec">Execution Model</a>
+            <a href="#display">Display Elements</a>
+            <a href="#widgets">Input Widgets</a>
+            <a href="#layout">Layout &amp; Containers</a>
+            <a href="#state">Session State</a>
+            <a href="#cache">Caching &amp; Connections</a>
+            <a href="#chat">Chat UI</a>
+            <a href="#forms">Forms</a>
+            <a href="#status">Status &amp; Feedback</a>
+            <a href="#secrets">Secrets</a>
+            <a href="#multipage">Multipage Apps</a>
+            <a href="#config">Page Config</a>
+        </div>
+        <!-- 1. EXECUTION MODEL -->
+        <div class="section" id="exec">
+            <div class="section-header">
+                <div class="section-icon ic-purple">⚡</div>
+                <div>
+                    <div class="section-num">Topic 75</div>
+                    <div class="section-title">Execution Model &amp; Performance</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Concept / Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Top-to-bottom Execution</td>
+                        <td>Script reruns entirely on every interaction.</td>
+                    </tr>
+                    <tr>
+                        <td>st.rerun()</td>
+                        <td>Forces an immediate programmatic rerun of the app.</td>
+                    </tr>
+                    <tr>
+                        <td>@st.fragment</td>
+                        <td>Decorator allowing independent partial reruns.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 2. DISPLAY ELEMENTS -->
+        <div class="section" id="display">
+            <div class="section-header">
+                <div class="section-icon ic-blue">📄</div>
+                <div>
+                    <div class="section-num">Topic 76</div>
+                    <div class="section-title">Display Elements</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.write()</td>
+                        <td>Universal display function.</td>
+                    </tr>
+                    <tr>
+                        <td>st.title(), st.header(), st.subheader()</td>
+                        <td>Typography and structuring tools.</td>
+                    </tr>
+                    <tr>
+                        <td>st.markdown()</td>
+                        <td>Full Markdown rendering.</td>
+                    </tr>
+                    <tr>
+                        <td>st.dataframe()</td>
+                        <td>Interactive data table.</td>
+                    </tr>
+                    <tr>
+                        <td>st.metric()</td>
+                        <td>KPI card with delta.</td>
+                    </tr>
+                    <tr>
+                        <td>st.json()</td>
+                        <td>Collapsible JSON tree.</td>
+                    </tr>
+                    <tr>
+                        <td>st.plotly_chart() / st.altair_chart()</td>
+                        <td>Advanced interactive visualizations.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 3. INPUT WIDGETS -->
+        <div class="section" id="widgets">
+            <div class="section-header">
+                <div class="section-icon ic-green">🎛️</div>
+                <div>
+                    <div class="section-num">Topic 77</div>
+                    <div class="section-title">Input Widgets</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.text_input(), st.text_area()</td>
+                        <td>Single/Multi-line text input.</td>
+                    </tr>
+                    <tr>
+                        <td>st.selectbox(), st.multiselect()</td>
+                        <td>Dropdown selection.</td>
+                    </tr>
+                    <tr>
+                        <td>st.slider(), st.number_input()</td>
+                        <td>Numeric/Range inputs.</td>
+                    </tr>
+                    <tr>
+                        <td>st.file_uploader()</td>
+                        <td>File upload widget.</td>
+                    </tr>
+                    <tr>
+                        <td>st.button()</td>
+                        <td>Click trigger.</td>
+                    </tr>
+                    <tr>
+                        <td>st.download_button()</td>
+                        <td>Exports data to a file.</td>
+                    </tr>
+                    <tr>
+                        <td>st.chat_input()</td>
+                        <td>Sticky chat input.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 4. LAYOUT & CONTAINERS -->
+        <div class="section" id="layout">
+            <div class="section-header">
+                <div class="section-icon ic-orange">🗂️</div>
+                <div>
+                    <div class="section-num">Topic 78</div>
+                    <div class="section-title">Layout &amp; Containers</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.sidebar</td>
+                        <td>Left panel container.</td>
+                    </tr>
+                    <tr>
+                        <td>st.columns()</td>
+                        <td>Side-by-side layout.</td>
+                    </tr>
+                    <tr>
+                        <td>st.tabs()</td>
+                        <td>Clickable tab panels.</td>
+                    </tr>
+                    <tr>
+                        <td>st.expander()</td>
+                        <td>Collapsible panel.</td>
+                    </tr>
+                    <tr>
+                        <td>st.container(), st.empty()</td>
+                        <td>Grouping and placeholders.</td>
+                    </tr>
+                    <tr>
+                        <td>@st.dialog</td>
+                        <td>Modal pop-up window.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 5. SESSION STATE -->
+        <div class="section" id="state">
+            <div class="section-header">
+                <div class="section-icon ic-purple">💾</div>
+                <div>
+                    <div class="section-num">Topic 79</div>
+                    <div class="section-title">Session State</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.session_state</td>
+                        <td>Per-user data persistence.</td>
+                    </tr>
+                    <tr>
+                        <td>Callbacks (on_click, on_change)</td>
+                        <td>Event-driven logic.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 6. CACHING & CONNECTIONS -->
+        <div class="section" id="cache">
+            <div class="section-header">
+                <div class="section-icon ic-yellow">⚡</div>
+                <div>
+                    <div class="section-num">Topic 80</div>
+                    <div class="section-title">Caching &amp; Connections</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>@st.cache_data</td>
+                        <td>Caches serializable data (copies).</td>
+                    </tr>
+                    <tr>
+                        <td>@st.cache_resource</td>
+                        <td>Caches global shared objects.</td>
+                    </tr>
+                    <tr>
+                        <td>st.connection()</td>
+                        <td>Built-in connector for databases/APIs.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 7. CHAT UI -->
+        <div class="section" id="chat">
+            <div class="section-header">
+                <div class="section-icon ic-green">💬</div>
+                <div>
+                    <div class="section-num">Topic 81</div>
+                    <div class="section-title">Chat UI</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.chat_message()</td>
+                        <td>Chat bubble container.</td>
+                    </tr>
+                    <tr>
+                        <td>st.chat_input()</td>
+                        <td>Chat input widget.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 8. FORMS -->
+        <div class="section" id="forms">
+            <div class="section-header">
+                <div class="section-icon ic-pink">📝</div>
+                <div>
+                    <div class="section-num">Topic 82</div>
+                    <div class="section-title">Forms</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.form()</td>
+                        <td>Widget batching container.</td>
+                    </tr>
+                    <tr>
+                        <td>st.form_submit_button()</td>
+                        <td>Form submission trigger.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 9. STATUS & FEEDBACK -->
+        <div class="section" id="status">
+            <div class="section-header">
+                <div class="section-icon ic-blue">🔔</div>
+                <div>
+                    <div class="section-num">Topic 83</div>
+                    <div class="section-title">Status &amp; Feedback</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.success(), st.error(), st.warning(), st.info()</td>
+                        <td>Colorful banner alerts.</td>
+                    </tr>
+                    <tr>
+                        <td>st.spinner()</td>
+                        <td>Loading animation.</td>
+                    </tr>
+                    <tr>
+                        <td>st.status()</td>
+                        <td>Expandable progress box.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 10. SECRETS -->
+        <div class="section" id="secrets">
+            <div class="section-header">
+                <div class="section-icon ic-yellow">🔐</div>
+                <div>
+                    <div class="section-num">Topic 84</div>
+                    <div class="section-title">Secrets Management</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.secrets</td>
+                        <td>Secure dictionary for credentials.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 11. MULTIPAGE APPS -->
+        <div class="section" id="multipage">
+            <div class="section-header">
+                <div class="section-icon ic-orange">📑</div>
+                <div>
+                    <div class="section-num">Topic 85</div>
+                    <div class="section-title">Multipage Apps</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Concept / Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>pages/ directory</td>
+                        <td>Automatic routing for multipage setup.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 12. PAGE CONFIG -->
+        <div class="section" id="config">
+            <div class="section-header">
+                <div class="section-icon ic-purple">⚙️</div>
+                <div>
+                    <div class="section-num">Topic 86</div>
+                    <div class="section-title">Page Config</div>
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>st.set_page_config()</td>
+                        <td>Initial page layout and metadata settings.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

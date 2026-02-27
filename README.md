@@ -1,40 +1,46 @@
-# 🚀 Streamlit Basics Demo
+# 🚀 Streamlit Mastery Series
 
-A comprehensive demonstration of Streamlit's core display functions, featuring a premium dark-themed UI and interactive data components.
+A comprehensive collection of 12 topic-based guides demonstrating every core concept of Streamlit, from basics to advanced production features.
 
-## 📋 Features Covered
-- **Core Display Functions**: `st.write`, `st.title`, `st.header`, `st.subheader`, `st.markdown`, `st.caption`, `st.code`.
-- **Data Visualization**: `st.dataframe` (Interactive), `st.table` (Static).
-- **KPI Reporting**: `st.metric` with delta indicators.
-- **Media & Structure**: `st.image` and `st.json` viewer.
+## 📋 Topics Covered
+
+1.  **Execution Model** (`1_execution_model.py`)
+2.  **Display Elements** (`2_display_elements.py`)
+3.  **Input Widgets** (`3_input_widgets.py`)
+4.  **Layout & Containers** (`4_layout_containers.py`)
+5.  **Session State** (`5_session_state.py`)
+6.  **Caching & Connections** (`6_caching_connections.py`)
+7.  **Chat UI** (`7_chat_ui.py`)
+8.  **Forms** (`8_forms.py`)
+9.  **Status & Feedback** (`9_status_feedback.py`)
+10. **Secrets Management** (`10_secrets.py`)
+11. **Multipage Apps** (`11_multipage_app.py`)
+12. **Page Config** (`12_page_config.py`)
 
 ---
 
 ## 🛠️ Setup and Installation
 
-Since `streamlit` was not found in your global path, it's recommended to install it using `python3 -m pip`.
-
 ### 1. Install Dependencies
-Run the following command in your terminal to install Streamlit and its requirements:
-
 ```bash
-python3 -m pip install -r requirements.txt
+python3 -m pip install streamlit pandas numpy plotly altair
 ```
 
-### 2. Run the Application
-After installation, launch the app using:
-
+### 2. Run any Topic
+Run any file individually to see the demo:
 ```bash
-python3 -m streamlit run basics.py
+python3 -m streamlit run 3_input_widgets.py
+```
+
+### 3. Run Multipage Demo
+```bash
+python3 -m streamlit run 11_multipage_app.py
 ```
 
 ---
 
 ## 📁 Project Structure
-- `basics.py`: Main application code with all Streamlit display examples.
-- `requirements.txt`: List of dependencies (Streamlit, Pandas, NumPy).
-- `banner.png`: Generated asset used for the `st.image` demonstration.
-
-## 💡 Troubleshooting
-If you still see "command not found", ensure you are using the full python path as shown above:
-`python3 -m streamlit run basics.py`
+- `X_*.py`: Individual topic demonstration files.
+- `11_pages/`: Sub-pages for the multipage application demo.
+- `code.html`: Original industry notes and requirements.
+- `.streamlit/secrets.toml`: (Auto-generated) Sample secrets for Topic 10.
