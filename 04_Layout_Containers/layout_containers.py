@@ -1,5 +1,5 @@
 """
-Topic 4 — Layout & Containers
+Topic 04 — Layout & Containers
 ================================
 Demonstrates:
   • st.sidebar
@@ -13,8 +13,8 @@ Demonstrates:
 import streamlit as st
 import time
 
-st.set_page_config(page_title="Topic 4 · Layout & Containers", page_icon="🗂️", layout="wide")
-st.title("🗂️ Topic 4 — Layout & Containers")
+st.set_page_config(page_title="Topic 04 · Layout & Containers", page_icon="🗂️", layout="wide")
+st.title("🗂️ Topic 04 — Layout & Containers")
 
 # ── 1. Sidebar ──────────────────────────────────────────────────────────────
 st.sidebar.header("🔧 Sidebar Controls")
@@ -118,4 +118,4 @@ if "last_feedback" in st.session_state:
     )
 
 st.markdown("---")
-st.caption("End of Topic 4 · Layout & Containers")
+st.caption("End of Topic 04 · Layout & Containers")

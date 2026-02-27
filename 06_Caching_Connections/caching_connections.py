@@ -1,5 +1,5 @@
 """
-Topic 6 — Caching & Connections
+Topic 06 — Caching & Connections
 =================================
 Demonstrates:
   • @st.cache_data    → caches serializable data (returns copies)
@@ -12,8 +12,8 @@ import pandas as pd
 import numpy as np
 import time
 
-st.set_page_config(page_title="Topic 6 · Caching & Connections", page_icon="⚡")
-st.title("⚡ Topic 6 — Caching & Connections")
+st.set_page_config(page_title="Topic 06 · Caching & Connections", page_icon="⚡")
+st.title("⚡ Topic 06 — Caching & Connections")
 
 # ── 1. @st.cache_data ───────────────────────────────────────────────────────
 st.header("1 · `@st.cache_data` — Cache Serializable Data")
@@ -137,4 +137,4 @@ comparison = pd.DataFrame(
 st.table(comparison.set_index("Feature"))
 
 st.markdown("---")
-st.caption("End of Topic 6 · Caching & Connections")
+st.caption("End of Topic 06 · Caching & Connections")

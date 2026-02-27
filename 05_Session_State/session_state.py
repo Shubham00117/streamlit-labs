@@ -1,5 +1,5 @@
 """
-Topic 5 — Session State
+Topic 05 — Session State
 =========================
 Demonstrates:
   • st.session_state  → per-user data persistence across reruns
@@ -8,8 +8,8 @@ Demonstrates:
 
 import streamlit as st
 
-st.set_page_config(page_title="Topic 5 · Session State", page_icon="💾")
-st.title("💾 Topic 5 — Session State")
+st.set_page_config(page_title="Topic 05 · Session State", page_icon="💾")
+st.title("💾 Topic 05 — Session State")
 
 # ── 1. st.session_state — Persistent Counter ────────────────────────────────
 st.header("1 · `st.session_state` — Persistent Counter")
@@ -99,4 +99,4 @@ st.text_input("Enter a city", key="city_input")
 st.write(f"Value from session_state: `{st.session_state.get('city_input', '')}`")
 
 st.markdown("---")
-st.caption("End of Topic 5 · Session State")
+st.caption("End of Topic 05 · Session State")

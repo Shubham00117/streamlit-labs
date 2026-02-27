@@ -1,5 +1,5 @@
 """
-Topic 2 — Display Elements
+Topic 02 — Display Elements
 ============================
 Demonstrates:
   • st.write()
@@ -15,8 +15,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="Topic 2 · Display Elements", page_icon="📄", layout="wide")
-st.title("📄 Topic 2 — Display Elements")
+st.set_page_config(page_title="Topic 02 · Display Elements", page_icon="📄", layout="wide")
+st.title("📄 Topic 02 — Display Elements")
 
 # ── 1. st.write() ───────────────────────────────────────────────────────────
 st.header("1 · `st.write()` — Universal Display")
@@ -128,4 +128,4 @@ with tab2:
         st.warning("Install altair: `pip install altair`")
 
 st.markdown("---")
-st.caption("End of Topic 2 · Display Elements")
+st.caption("End of Topic 02 · Display Elements")

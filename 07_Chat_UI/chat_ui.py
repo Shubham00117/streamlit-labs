@@ -1,5 +1,5 @@
 """
-Topic 7 — Chat UI
+Topic 07 — Chat UI
 ===================
 Demonstrates:
   • st.chat_message() → chat bubble container
@@ -10,8 +10,8 @@ Implements a simple echo-bot that stores conversation history in session state.
 
 import streamlit as st
 
-st.set_page_config(page_title="Topic 7 · Chat UI", page_icon="💬")
-st.title("💬 Topic 7 — Chat UI")
+st.set_page_config(page_title="Topic 07 · Chat UI", page_icon="💬")
+st.title("💬 Topic 07 — Chat UI")
 
 st.write(
     "A simple **echo-bot** demonstrating `st.chat_message()` and `st.chat_input()`. "

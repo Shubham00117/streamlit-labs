@@ -1,5 +1,5 @@
 """
-Topic 9 — Status & Feedback
+Topic 09 — Status & Feedback
 ==============================
 Demonstrates:
   • st.success(), st.error(), st.warning(), st.info() → banner alerts
@@ -10,8 +10,8 @@ Demonstrates:
 import streamlit as st
 import time
 
-st.set_page_config(page_title="Topic 9 · Status & Feedback", page_icon="🔔")
-st.title("🔔 Topic 9 — Status & Feedback")
+st.set_page_config(page_title="Topic 09 · Status & Feedback", page_icon="🔔")
+st.title("🔔 Topic 09 — Status & Feedback")
 
 # ── 1. Alert Banners ────────────────────────────────────────────────────────
 st.header("1 · Alert Banners")
@@ -74,4 +74,4 @@ if st.button("🍞 Show Toast"):
     st.toast("This is a toast notification!", icon="🔔")
 
 st.markdown("---")
-st.caption("End of Topic 9 · Status & Feedback")
+st.caption("End of Topic 09 · Status & Feedback")

@@ -29,8 +29,8 @@ st.markdown("---")
 st.subheader("📁 Project Structure for Multipage")
 st.code(
     """
-11_multipage_app.py              ← Main entry point
-11_pages/
+11_Multipage_Apps/multipage_app.py                        ← Main entry point
+11_Multipage_Apps/pages/
   ├── page_home.py               ← This page (Home)
   ├── page_analytics.py          ← Analytics page
   └── page_settings.py           ← Settings page
@@ -46,9 +46,9 @@ st.code(
 import streamlit as st
 
 # Define pages
-home = st.Page("11_pages/page_home.py", title="Home", icon="🏠", default=True)
-analytics = st.Page("11_pages/page_analytics.py", title="Analytics", icon="📈")
-settings = st.Page("11_pages/page_settings.py", title="Settings", icon="⚙️")
+home = st.Page("pages/page_home.py", title="Home", icon="🏠", default=True)
+analytics = st.Page("pages/page_analytics.py", title="Analytics", icon="📈")
+settings = st.Page("pages/page_settings.py", title="Settings", icon="⚙️")
 
 # Build navigation
 nav = st.navigation([home, analytics, settings])

@@ -1,5 +1,5 @@
 """
-Topic 8 — Forms
+Topic 08 — Forms
 =================
 Demonstrates:
   • st.form()               → widget batching container
@@ -11,8 +11,8 @@ when the submit button is pressed.
 
 import streamlit as st
 
-st.set_page_config(page_title="Topic 8 · Forms", page_icon="📝")
-st.title("📝 Topic 8 — Forms")
+st.set_page_config(page_title="Topic 08 · Forms", page_icon="📝")
+st.title("📝 Topic 08 — Forms")
 
 # ── 1. Basic Form ────────────────────────────────────────────────────────────
 st.header("1 · Basic Form")
@@ -106,4 +106,4 @@ with col2:
         st.info(f"Searching for **'{query}'** in **{category}**…")
 
 st.markdown("---")
-st.caption("End of Topic 8 · Forms")
+st.caption("End of Topic 08 · Forms")

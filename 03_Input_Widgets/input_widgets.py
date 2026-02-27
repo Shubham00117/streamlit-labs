@@ -1,5 +1,5 @@
 """
-Topic 3 — Input Widgets
+Topic 03 — Input Widgets
 =========================
 Demonstrates:
   • st.text_input(), st.text_area()
@@ -14,8 +14,8 @@ Demonstrates:
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="Topic 3 · Input Widgets", page_icon="🎛️")
-st.title("🎛️ Topic 3 — Input Widgets")
+st.set_page_config(page_title="Topic 03 · Input Widgets", page_icon="🎛️")
+st.title("🎛️ Topic 03 — Input Widgets")
 
 # ── 1. Text Inputs ──────────────────────────────────────────────────────────
 st.header("1 · Text Inputs")
@@ -114,4 +114,4 @@ if prompt:
     st.write(f"You said: **{prompt}**")
 
 st.markdown("---")
-st.caption("End of Topic 3 · Input Widgets")
+st.caption("End of Topic 03 · Input Widgets")
